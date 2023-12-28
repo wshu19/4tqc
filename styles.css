@@ -1,0 +1,50 @@
+.countDown {
+    font-size: 18px;
+    font-weight: bold;
+    color: blue;
+    text-align: right; /* Align text to the right */
+    margin: 0 auto; /* Center the element in its container */
+    /* Add your additional styling here */
+    transform: translateX(-50%); /* Offset the text to the left */
+}
+
+.result {
+    font-size: 25px;
+    color: green;
+    text-align: right; /* Align text to the right */
+    margin: 0 auto; /* Center the element in its container */
+    /* Add your additional styling here */
+    transform: translateX(-50%); /* Offset the text to the left */
+}
+
+
+  
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+  }
+  
+  button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  
