@@ -1,3 +1,15 @@
+//localStorage.setItem("totalRuntime", 0);
+let currentTime = localStorage.getItem("totalRuntime");
+
+console.log(`totalTime is `, currentTime);
+let timemins = (currentTime/60);
+let closest5 = Math.floor((timemins+5)/5)*5;
+// Display the current time in the label
+document.getElementById("currentTimeLabel").textContent += Math.floor(timemins) + "\n";
+document.getElementById("currentTimeLabel").textContent += "\nJust a few more till: ";
+document.getElementById("currentTimeLabel").textContent += closest5;
+
+
 const mixes = [
   {name: "Tom Collins", components: ["Gin", "Sugar Syrop", "Lemon Juice", "Soda Water"], ratios: [1, 1, 0.5, 2]},
   {name: "Screwdriver", components: ["Vodka", "Sugar Syrop", "Orange"],  ratios: [1, 1, 3]},
@@ -18,6 +30,8 @@ mixes.forEach((mix) => {
 
 
 
+
+
 let randomMixesIndex = Math.floor(Math.random() * mixes.length);
 let chosenMix = mixes[randomMixesIndex];
 let ratio = chosenMix.ratios;
@@ -25,6 +39,28 @@ let amountIngredients = ratio.length;
 let sum1 = 0;
 let wantRounding = 1;
 
+let refreshesWithoutUserInput = localStorage.getItem("refreshesWithoutUserInput") || 0; // Default to 0 if not set
+
+
+// Check if the amount of refreshes is higher than 3
+if (refreshesWithoutUserInput > 2) {
+  // Stop the program and display a message
+  document.body.innerHTML = '<div>Press any key to continue</div>';
+
+  // Set refreshesWithoutUserInput to 0
+  localStorage.setItem("refreshesWithoutUserInput",0);
+
+  // Function to reset and continue when any key is pressed
+  window.addEventListener('keydown', resetAndContinue);
+  
+  function resetAndContinue() {
+    window.removeEventListener('keydown', resetAndContinue); // Remove the event listener
+    location.reload();
+  }
+}
+
+
+console.log(`Afk visits`, refreshesWithoutUserInput);
 
 // Function to calculate amounts based on totalML
 function calculateAmounts(totalML, wantRounding) {
@@ -118,6 +154,17 @@ const intervalId = setInterval(() => {
 
 }
 
+// Get the current time when the program starts
+const startTime = new Date();
+
+// Function to calculate the elapsed time in seconds
+function getElapsedTime() {
+  const currentTime = new Date().getTime();
+  const elapsedTimeInSeconds = Math.floor((currentTime - startTime.getTime()) / 1000);
+  return elapsedTimeInSeconds;
+}
+
+
 // Example usage:
 const timerDisplay = document.getElementById("timerDisplay");
 const resultDisplay = document.getElementById("resultDisplay");
@@ -174,6 +221,23 @@ const finishCallback = () => {
 
   // Refresh the page after 7 seconds
   setTimeout(() => {
+    refreshesWithoutUserInput++;
+    localStorage.setItem("refreshesWithoutUserInput",refreshesWithoutUserInput);
+    
+    let gotTime = getElapsedTime();
+    
+    // Using Number function
+let totalRuntime1 = Number(currentTime) + Number(gotTime);
+
+// Using unary plus operator
+let totalRuntime2 = +currentTime + +gotTime;
+
+console.log(totalRuntime1); // Output: 30
+console.log(totalRuntime2); // Output: 30
+    //totalRuntime = 0;
+    localStorage.setItem("totalRuntime",totalRuntime1);
+
+
     location.reload();
   }, pageRefresh);
 };

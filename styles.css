@@ -31,6 +31,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px; /* Adjust the gap between buttons as needed */
+    margin-left: 1px;
   }
   
   button {
@@ -48,3 +49,11 @@ body {
   }
   
   
+  #currentTimeLabel {    
+    margin-left: 5vw;
+    height: 90vh;
+    font-size: 18px;
+    color: blue;
+    white-space: pre-line; /* or white-space: pre-wrap; */
+    /* Add your additional styling here */
+  }
